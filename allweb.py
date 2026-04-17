@@ -83,7 +83,7 @@ if __name__ == "__main__":
 
     print("\n✅ Done!\n")        
     name = repo.get("name", "No name")
-        html_url = repo.get("html_url", "No URL")
+    html_url = repo.get("html_url", "No URL")
 
         # 🔥 Optional: Detect GitHub Pages
         pages_url = None
