@@ -5,6 +5,9 @@ GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 RENDER_API_KEY = os.getenv("RENDER_API_KEY")
 
 
+# ----------------------------
+# 🔵 GitHub Repositories
+# ----------------------------
 def get_github_repos():
     print("\n🔵 GitHub Websites:\n")
 
@@ -35,6 +38,58 @@ def get_github_repos():
             pages_url = f"https://{repo['owner']['login']}.github.io/{name}"
 
         print(f"📦 {name}")
+        print(f"   Repo: {html_url}")
+        if pages_url:
+            print(f"   🌐 Live: {pages_url}")
+        print()
+
+
+# ----------------------------
+# 🟣 Render Services
+# ----------------------------
+def get_render_services():
+    print("\n🟣 Render Websites:\n")
+
+    if not RENDER_API_KEY:
+        print("❌ RENDER_API_KEY not set")
+        return
+
+    url = "https://api.render.com/v1/services"
+    headers = {"Authorization": f"Bearer {RENDER_API_KEY}"}
+
+    try:
+        response = requests.get(url, headers=headers)
+        data = response.json()
+    except Exception as e:
+        print("❌ Render request failed:", e)
+        return
+
+    if not isinstance(data, list):
+        print("❌ Render Error:", data)
+        return
+
+    for service in data:
+        srv = service.get("service", {})
+        name = srv.get("name", "No name")
+        url = srv.get("serviceDetails", {}).get("url", "No URL")
+        type_ = srv.get("type", "Unknown")
+
+        print(f"🚀 {name}")
+        print(f"   Type: {type_}")
+        print(f"   🌐 URL: {url}")
+        print()
+
+
+# ----------------------------
+# 🚀 MAIN
+# ----------------------------
+if __name__ == "__main__":
+    print("🔍 Fetching your websites...\n")
+
+    get_github_repos()
+    get_render_services()
+
+    print("\n✅ Done!\n")        print(f"📦 {name}")
         print(f"   Repo: {html_url}")
         if pages_url:
             print(f"   🌐 Live: {pages_url}")
