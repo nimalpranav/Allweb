@@ -81,7 +81,8 @@ if __name__ == "__main__":
     get_github_repos()
     get_render_services()
 
-    print("\n✅ Done!\n")        name = repo.get("name", "No name")
+    print("\n✅ Done!\n")        
+    name = repo.get("name", "No name")
         html_url = repo.get("html_url", "No URL")
 
         # 🔥 Optional: Detect GitHub Pages
