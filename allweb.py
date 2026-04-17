@@ -99,7 +99,8 @@ if __name__ == "__main__":
     get_github_repos()
     get_render_services()
 
-    print("\n✅ Done!\n")    for service in services:
+    print("\n✅ Done!\n")    
+    for service in services:
         name = service["service"]["name"]
         url = service["service"].get("serviceDetails", {}).get("url", "No URL")
         print(f"{name} → {url}")
